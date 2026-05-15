@@ -2,169 +2,459 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>Simple CGPA Dashboard</title>
+<title>AI CGPA Predictor</title>
 
 <style>
 
 body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#0b1d3a;
-    color:white;
-    text-align:center;
+margin:0;
+font-family:Arial;
+background:#071b34;
+color:white;
 }
 
 header{
-    padding:20px;
+text-align:center;
+padding:20px;
+background:#0d2748;
 }
 
 .container{
-    width:90%;
-    max-width:700px;
-    margin:auto;
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+padding:20px;
+}
+
+.left{
+flex:2;
+min-width:320px;
+}
+
+.right{
+flex:1;
+min-width:300px;
 }
 
 .card{
-    background:#132850;
-    padding:20px;
-    border-radius:15px;
-    margin-top:20px;
+background:#102d52;
+padding:20px;
+border-radius:12px;
 }
 
-input{
-    padding:10px;
-    margin:10px;
-    border:none;
-    border-radius:8px;
-    width:220px;
+input,button{
+width:100%;
+padding:12px;
+margin-top:12px;
+border:none;
+border-radius:8px;
+font-size:15px;
 }
 
 button{
-    padding:12px 20px;
-    border:none;
-    border-radius:10px;
-    background:#00aaff;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
+background:#00aaff;
+color:white;
+font-weight:bold;
+cursor:pointer;
 }
 
 button:hover{
-    background:#0088cc;
+background:#0088cc;
 }
 
-#result{
-    margin-top:20px;
-    font-size:18px;
+.box{
+background:#173c6b;
+padding:12px;
+border-radius:10px;
+margin-top:12px;
+line-height:1.7;
+}
+
+.good{
+color:#00ff99;
+}
+
+.mid{
+color:#ffd166;
+}
+
+.low{
+color:#ff6b6b;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <header>
-    <h1>🎯 Simple CGPA Dashboard</h1>
-    <p>CGPA & Backlog Analyzer</p>
+
+<h1>🎯 AI Smart CGPA Predictor</h1>
+
+<p>Real Subject Wise Required Marks Analysis</p>
+
 </header>
 
 <div class="container">
 
-    <!-- CGPA SECTION -->
+<!-- LEFT -->
 
-    <div class="card">
+<div class="left">
 
-        <h2>CGPA Calculator</h2>
+<div class="card">
 
-        <input type="number" id="currentCGPA" placeholder="Current CGPA" step="0.1">
+<h2>👨‍🎓 Student Details</h2>
 
-        <input type="number" id="targetCGPA" placeholder="Target CGPA" step="0.1">
+<input id="name" placeholder="Student Name">
 
-        <br>
+<input id="roll" placeholder="Roll Number">
 
-        <button onclick="calculateCGPA()">
-            Calculate
-        </button>
+<input id="current" type="number" step="0.1"
+placeholder="Current CGPA">
 
-    </div>
+<input id="target" type="number" step="0.1"
+placeholder="Target CGPA">
 
-    <!-- BACKLOG SECTION -->
+<input id="count" type="number"
+placeholder="Number Of Subjects">
 
-    <div class="card">
+<button onclick="generateSubjects()">
 
-        <h2>Backlog Analyzer</h2>
+Generate Subjects
 
-        <input type="text" id="failedSubject" placeholder="Failed Subject">
+</button>
 
-        <input type="number" id="cgpaDrop" placeholder="Expected CGPA Drop">
+<div id="subjects"></div>
 
-        <br>
+<button onclick="calculateMarks()">
 
-        <button onclick="analyzeBacklog()">
-            Analyze
-        </button>
+Calculate Required Marks
 
-    </div>
+</button>
 
-    <!-- RESULT -->
+</div>
 
-    <div class="card">
+</div>
 
-        <h2>Results</h2>
+<!-- RIGHT -->
 
-        <div id="result">
-            Your results will appear here.
-        </div>
+<div class="right">
 
-    </div>
+<div class="card">
+
+<h2>📊 Final Result</h2>
+
+<div id="result">
+
+Results will appear here...
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
 <script>
 
-function calculateCGPA(){
+/* GENERATE SUBJECT INPUTS */
 
-    let current =
-    parseFloat(document.getElementById("currentCGPA").value);
+function generateSubjects(){
 
-    let target =
-    parseFloat(document.getElementById("targetCGPA").value);
+let n = count.value;
 
-    let improvement = target - current;
+let html = "";
 
-    document.getElementById("result").innerHTML = `
+for(let i=0;i<n;i++){
 
-        <p>📊 Current CGPA: <b>${current}</b></p>
+html += `
 
-        <p>🎯 Target CGPA: <b>${target}</b></p>
+<div class="box">
 
-        <p>📈 Improvement Needed: <b>${improvement.toFixed(2)}</b></p>
+<h3>📘 Subject ${i+1}</h3>
 
-    `;
+<input id="sub${i}"
+placeholder="Subject Name">
+
+<input id="mark${i}"
+type="number"
+placeholder="Out Of Marks">
+
+</div>
+
+`;
+
 }
 
-function analyzeBacklog(){
+subjects.innerHTML = html;
 
-    let subject =
-    document.getElementById("failedSubject").value;
+}
 
-    let drop =
-    parseFloat(document.getElementById("cgpaDrop").value);
+/* MAIN CALCULATION */
 
-    document.getElementById("result").innerHTML += `
+function calculateMarks(){
 
-        <hr>
+let currentCgpa = parseFloat(current.value);
 
-        <p>❌ Failed Subject: <b>${subject}</b></p>
+let targetCgpa = parseFloat(target.value);
 
-        <p>📉 Expected CGPA Drop: <b>${drop}</b></p>
+let totalSubjects = parseInt(count.value);
 
-    `;
+/* VALIDATION */
+
+if(targetCgpa <= currentCgpa){
+
+result.innerHTML = `
+
+<div class="box">
+
+<h3>⚠️ Invalid Target</h3>
+
+<p>
+Target CGPA should be greater than Current CGPA.
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+/* REALISTIC REQUIRED PERFORMANCE */
+
+/*
+CGPA ANALYSIS LOGIC
+
+Current CGPA → Existing Performance
+Target CGPA → Future Goal
+
+Higher gap means higher marks needed.
+
+*/
+
+let cgpaGap = targetCgpa - currentCgpa;
+
+/* BASE REQUIRED PERCENTAGE */
+
+let requiredPercentage =
+(currentCgpa * 9.5) +
+(cgpaGap * 12);
+
+/* EXTRA BOOST FOR HIGH TARGETS */
+
+if(targetCgpa >= 9){
+
+requiredPercentage += 5;
+
+}
+
+else if(targetCgpa >= 8){
+
+requiredPercentage += 3;
+
+}
+
+/* LIMIT */
+
+if(requiredPercentage > 95){
+
+requiredPercentage = 95;
+
+}
+
+/* ANALYSIS MESSAGE */
+
+let analysis = "";
+let color = "";
+
+if(requiredPercentage >= 90){
+
+analysis =
+"🔥 Very high and consistent performance required.";
+
+color = "good";
+
+}
+
+else if(requiredPercentage >= 75){
+
+analysis =
+"✅ Good academic performance required.";
+
+color = "mid";
+
+}
+
+else{
+
+analysis =
+"📘 Moderate preparation required.";
+
+color = "low";
+
+}
+
+/* RESULT HTML */
+
+let html = `
+
+<div class="box">
+
+<h3>👨‍🎓 Student Details</h3>
+
+<p><b>Name:</b> ${name.value}</p>
+
+<p><b>Roll Number:</b> ${roll.value}</p>
+
+<p><b>Current CGPA:</b> ${currentCgpa}</p>
+
+<p><b>Target CGPA:</b> ${targetCgpa}</p>
+
+</div>
+
+<div class="box">
+
+<h3>📈 CGPA Analysis</h3>
+
+<p class="${color}">
+${analysis}
+</p>
+
+<p>
+Current Academic Percentage:
+<b>${(currentCgpa*9.5).toFixed(1)}%</b>
+</p>
+
+<p>
+Estimated Required Percentage:
+<b>${requiredPercentage.toFixed(1)}%</b>
+</p>
+
+<p>
+Required Improvement:
+<b>${cgpaGap.toFixed(2)} CGPA</b>
+</p>
+
+</div>
+
+`;
+
+/* SUBJECT WISE REQUIRED MARKS */
+
+for(let i=0;i<totalSubjects;i++){
+
+let subject =
+document.getElementById(`sub${i}`).value;
+
+let outMarks =
+parseFloat(
+document.getElementById(`mark${i}`).value
+);
+
+let requiredMarks =
+(requiredPercentage / 100) * outMarks;
+
+/* PERFECT ROUNDING */
+
+requiredMarks =
+Math.ceil(requiredMarks);
+
+/* LIMIT */
+
+if(requiredMarks > outMarks){
+
+requiredMarks = outMarks;
+
+}
+
+/* SUBJECT STATUS */
+
+let status = "";
+
+if(requiredMarks >= outMarks * 0.90){
+
+status =
+"🔥 Excellent performance needed";
+
+}
+
+else if(requiredMarks >= outMarks * 0.75){
+
+status =
+"✅ Strong preparation needed";
+
+}
+
+else{
+
+status =
+"📘 Moderate preparation needed";
+
+}
+
+/* APPEND */
+
+html += `
+
+<div class="box">
+
+<h3>📚 ${subject}</h3>
+
+<p>
+Required Marks:
+<b>${requiredMarks} / ${outMarks}</b>
+</p>
+
+<p>${status}</p>
+
+</div>
+
+`;
+
+}
+
+/* FINAL SUGGESTION */
+
+html += `
+
+<div class="box">
+
+<h3>🎯 Final Suggestion</h3>
+
+<p>
+
+To move from
+<b>${currentCgpa} CGPA</b>
+to
+<b>${targetCgpa} CGPA</b>,
+
+you should maintain approximately
+<b>${requiredPercentage.toFixed(1)}%</b>
+overall performance across all subjects.
+
+Focus on regular study,
+assignments,
+internals,
+and revision consistently.
+
+</p>
+
+</div>
+
+`;
+
+result.innerHTML = html;
+
 }
 
 </script>
 
 </body>
+
 </html>
