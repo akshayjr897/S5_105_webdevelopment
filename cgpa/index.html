@@ -4,333 +4,60 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>⚛️ Smart CGPA & Exam Planner</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+<title>Simple CGPA Dashboard</title>
 
 <style>
 
-/* ================= BODY ================= */
-
 body{
     margin:0;
-    font-family:'Poppins',sans-serif;
-    background:linear-gradient(135deg,#07111f,#001f54);
+    font-family:Arial, sans-serif;
+    background:#0b1d3a;
     color:white;
-    overflow-x:hidden;
+    text-align:center;
 }
-
-/* ================= HEADER ================= */
 
 header{
-    text-align:center;
-    padding:35px;
-}
-
-header h1{
-    font-family:'Orbitron',sans-serif;
-    font-size:45px;
-    text-shadow:0 0 20px #00f0ff;
-    animation:glow 2s infinite alternate;
-}
-
-.subtitle{
-    color:#7fdfff;
-    font-size:18px;
-}
-
-/* ================= TOP BUTTONS ================= */
-
-.top-buttons{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:20px;
-    margin-bottom:25px;
-}
-
-.btn{
-    padding:14px 28px;
-    border:none;
-    border-radius:30px;
-    cursor:pointer;
-    color:white;
-    font-weight:bold;
-    font-size:15px;
-    transition:0.4s;
-}
-
-.btn:hover{
-    transform:scale(1.1);
-    box-shadow:0 0 25px white;
-}
-
-.cgpaBtn{
-    background:linear-gradient(45deg,#00f0ff,#0077ff);
-}
-
-.backlogBtn{
-    background:linear-gradient(45deg,#ffb703,#ff7b00);
-}
-
-.examBtn{
-    background:linear-gradient(45deg,#ff416c,#ff4b2b);
-}
-
-/* ================= DASHBOARD ================= */
-
-.dashboard{
-    display:flex;
-    flex-wrap:wrap;
-    gap:20px;
     padding:20px;
-    align-items:flex-start;
 }
 
-.left-panel{
-    flex:2;
-    min-width:700px;
+.container{
+    width:90%;
+    max-width:700px;
+    margin:auto;
 }
-
-.right-panel{
-    flex:1;
-    min-width:320px;
-    position:sticky;
-    top:20px;
-}
-
-/* ================= CARD ================= */
 
 .card{
-    background:rgba(255,255,255,0.05);
-    backdrop-filter:blur(14px);
-    border-radius:22px;
-    padding:25px;
-    margin-bottom:20px;
-    box-shadow:0 0 25px rgba(0,240,255,0.2);
-    animation:fade 0.6s ease;
+    background:#132850;
+    padding:20px;
+    border-radius:15px;
+    margin-top:20px;
 }
-
-/* ================= INPUTS ================= */
 
 input{
-    padding:12px;
-    margin:8px;
+    padding:10px;
+    margin:10px;
     border:none;
-    border-radius:12px;
-    outline:none;
-    background:#f5f5f5;
+    border-radius:8px;
     width:220px;
-    font-size:15px;
 }
 
-/* ================= SUBJECT GRID ================= */
-
-.subject-row{
-    display:flex;
-    gap:18px;
-    margin-top:15px;
-    flex-wrap:wrap;
-}
-
-.subject-card{
-    flex:1;
-    min-width:250px;
-    padding:18px;
-    border-radius:18px;
-    transition:0.4s;
-    animation:float 4s infinite ease-in-out;
-}
-
-.subject-card:hover{
-    transform:translateY(-8px) scale(1.03);
-    box-shadow:0 0 25px #00f0ff;
-}
-
-.subject-card:nth-child(1){
-    background:linear-gradient(135deg,#00c6ff,#0072ff);
-}
-
-.subject-card:nth-child(2){
-    background:linear-gradient(135deg,#00ff95,#00c853);
-}
-
-.subject-card:nth-child(3){
-    background:linear-gradient(135deg,#ffb703,#ff7b00);
-}
-
-/* ================= ANALYTICS ================= */
-
-.analytics-box{
-    margin-top:15px;
-    padding:15px;
-    border-radius:18px;
-    background:rgba(255,255,255,0.06);
-    animation:pulse 2s infinite;
-}
-
-/* ================= CIRCLE ================= */
-
-.circle{
-    width:180px;
-    height:180px;
-    border-radius:50%;
-    margin:20px auto;
-    background:conic-gradient(
-    #00f0ff 0deg,
-    #00f0ff var(--progress),
-    rgba(255,255,255,0.1) var(--progress)
-    );
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-    animation:rotate 3s linear infinite;
-}
-
-.circle::before{
-    content:"";
-    position:absolute;
-    width:140px;
-    height:140px;
-    background:#07111f;
-    border-radius:50%;
-}
-
-.circle span{
-    position:relative;
-    z-index:1;
-    font-size:28px;
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:10px;
+    background:#00aaff;
+    color:white;
     font-weight:bold;
-    color:#00f0ff;
+    cursor:pointer;
 }
 
-/* ================= EXAM TIMETABLE ================= */
-
-.exam-date-banner{
-    text-align:center;
-    padding:15px;
-    border-radius:18px;
-    margin-bottom:20px;
-    background:linear-gradient(45deg,#ff416c,#ff4b2b);
-    animation:pulse 2s infinite;
+button:hover{
+    background:#0088cc;
 }
 
-.exam-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:15px;
-}
-
-.exam-card{
-    padding:18px;
-    border-radius:18px;
-    background:rgba(255,255,255,0.05);
-    border-left:5px solid #00f0ff;
-    transition:0.4s;
-    animation:float 3s infinite ease-in-out;
-}
-
-.exam-card:hover{
-    transform:scale(1.05);
-    box-shadow:0 0 25px #00f0ff;
-}
-
-/* ================= FEATURE SECTION ================= */
-
-.features{
-    padding:40px 20px;
-    text-align:center;
-}
-
-.feature-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-    margin-top:25px;
-}
-
-.feature-card{
-    background:rgba(255,255,255,0.05);
-    padding:20px;
-    border-radius:20px;
-    transition:0.4s;
-    animation:float 4s infinite ease-in-out;
-}
-
-.feature-card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 0 25px #00f0ff;
-}
-
-/* ================= FOOTER ================= */
-
-.footer{
-    text-align:center;
-    padding:20px;
-    color:#7fdfff;
-}
-
-/* ================= ANIMATIONS ================= */
-
-@keyframes glow{
-    from{
-        text-shadow:0 0 10px #00f0ff;
-    }
-
-    to{
-        text-shadow:0 0 30px #00f0ff;
-    }
-}
-
-@keyframes fade{
-    from{
-        opacity:0;
-        transform:translateY(10px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-@keyframes pulse{
-    0%{
-        box-shadow:0 0 10px #00f0ff;
-    }
-
-    50%{
-        box-shadow:0 0 25px #00f0ff;
-    }
-
-    100%{
-        box-shadow:0 0 10px #00f0ff;
-    }
-}
-
-@keyframes float{
-    0%{
-        transform:translateY(0px);
-    }
-
-    50%{
-        transform:translateY(-5px);
-    }
-
-    100%{
-        transform:translateY(0px);
-    }
-}
-
-@keyframes rotate{
-    from{
-        transform:rotate(0deg);
-    }
-
-    to{
-        transform:rotate(360deg);
-    }
+#result{
+    margin-top:20px;
+    font-size:18px;
 }
 
 </style>
@@ -338,575 +65,104 @@ input{
 
 <body>
 
-<!-- ================= HEADER ================= -->
-
 <header>
-
-<h1>⚛️ Smart CGPA & Exam Planner</h1>
-
-<p class="subtitle">
-AI Based Academic Performance Dashboard
-</p>
-
+    <h1>🎯 Simple CGPA Dashboard</h1>
+    <p>CGPA & Backlog Analyzer</p>
 </header>
 
-<!-- ================= BUTTONS ================= -->
+<div class="container">
 
-<div class="top-buttons">
+    <!-- CGPA SECTION -->
 
-<button class="btn cgpaBtn"
-onclick="showSection('cgpaSection')">
+    <div class="card">
 
-🎯 CGPA Calculator
+        <h2>CGPA Calculator</h2>
 
-</button>
+        <input type="number" id="currentCGPA" placeholder="Current CGPA" step="0.1">
 
-<button class="btn backlogBtn"
-onclick="showSection('backlogSection')">
+        <input type="number" id="targetCGPA" placeholder="Target CGPA" step="0.1">
 
-📉 Backlog Analyzer
+        <br>
 
-</button>
+        <button onclick="calculateCGPA()">
+            Calculate
+        </button>
 
-<button class="btn examBtn"
-onclick="showSection('examSection')">
+    </div>
 
-🗓️ Exam Timetable
+    <!-- BACKLOG SECTION -->
 
-</button>
+    <div class="card">
 
-</div>
+        <h2>Backlog Analyzer</h2>
 
-<!-- ================= MAIN DASHBOARD ================= -->
+        <input type="text" id="failedSubject" placeholder="Failed Subject">
 
-<div class="dashboard">
+        <input type="number" id="cgpaDrop" placeholder="Expected CGPA Drop">
 
-<!-- ================= LEFT PANEL ================= -->
+        <br>
 
-<div class="left-panel">
+        <button onclick="analyzeBacklog()">
+            Analyze
+        </button>
 
-<!-- ================= CGPA SECTION ================= -->
+    </div>
 
-<div id="cgpaSection" class="card">
+    <!-- RESULT -->
 
-<h2>🎯 Smart CGPA Calculator</h2>
+    <div class="card">
 
-<input type="number"
-id="currentCGPA"
-placeholder="Current CGPA"
-step="0.1">
+        <h2>Results</h2>
 
-<input type="number"
-id="targetCGPA"
-placeholder="Target CGPA"
-step="0.1">
+        <div id="result">
+            Your results will appear here.
+        </div>
 
-<br>
-
-<input type="number"
-id="subjects"
-placeholder="Number of Subjects">
-
-<button class="btn cgpaBtn"
-onclick="createSubjects()">
-
-➕ Generate Subjects
-
-</button>
-
-<div id="subjectInputs"></div>
-
-<button class="btn cgpaBtn"
-onclick="calculateSubjects()">
-
-📊 Calculate Required Marks
-
-</button>
+    </div>
 
 </div>
-
-<!-- ================= BACKLOG ================= -->
-
-<div id="backlogSection"
-class="card"
-style="display:none;">
-
-<h2>📉 Backlog Impact Calculator</h2>
-
-<input type="text"
-id="failedSubject"
-placeholder="Failed Subject">
-
-<input type="number"
-id="currentCgpaBacklog"
-placeholder="Current CGPA">
-
-<input type="number"
-id="dropValue"
-placeholder="Expected CGPA Drop">
-
-<br>
-
-<button class="btn backlogBtn"
-onclick="calculateBacklogImpact()">
-
-⚠️ Analyze Backlog
-
-</button>
-
-</div>
-
-<!-- ================= EXAM TIMETABLE ================= -->
-
-<div id="examSection"
-class="card"
-style="display:none;">
-
-<h2>🗓️ Exam Timetable Generator</h2>
-
-<div class="exam-date-banner">
-
-<h3>📅 Upcoming Exam Schedule</h3>
-
-<p id="liveDateTime"></p>
-
-</div>
-
-<input type="text"
-id="examSubject"
-placeholder="Subject Name">
-
-<input type="date"
-id="examDate">
-
-<input type="time"
-id="examTime">
-
-<br>
-
-<button class="btn examBtn"
-onclick="addExam()">
-
-➕ Add Exam
-
-</button>
-
-<div id="examCards" class="exam-grid"></div>
-
-</div>
-
-</div>
-
-<!-- ================= RIGHT PANEL ================= -->
-
-<div class="right-panel">
-
-<div class="card">
-
-<h2>📈 Overall Academic Dashboard</h2>
-
-<div class="circle" id="cgpaCircle">
-
-<span id="cgpaPercent">0%</span>
-
-</div>
-
-<div id="overallResult">
-
-<p style="color:#7fdfff;">
-✨ Results & Analytics Will Appear Here
-</p>
-
-</div>
-
-<div class="analytics-box">
-
-<h3>📊 Analytics Info</h3>
-
-<p>✔ CGPA Prediction</p>
-
-<p>✔ Smart Backlog Recovery</p>
-
-<p>✔ Exam Timetable Tracking</p>
-
-<p>✔ Subject Wise Analysis</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- ================= FEATURES ================= -->
-
-<div class="features">
-
-<h2>🚀 Key Features</h2>
-
-<div class="feature-grid">
-
-<div class="feature-card">
-
-<h3>🎯 AI CGPA Prediction</h3>
-
-<p>
-Analyze required marks with smart visualization
-</p>
-
-</div>
-
-<div class="feature-card">
-
-<h3>📉 Backlog Recovery</h3>
-
-<p>
-Predict CGPA drop and get recovery suggestions
-</p>
-
-</div>
-
-<div class="feature-card">
-
-<h3>🗓️ Smart Timetable</h3>
-
-<p>
-Organize exams with animated cards and schedules
-</p>
-
-</div>
-
-<div class="feature-card">
-
-<h3>📊 Academic Analytics</h3>
-
-<p>
-Track improvement and academic performance visually
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- ================= FOOTER ================= -->
-
-<div class="footer">
-
-✨ Designed for Smart Students | Academic Intelligence System
-
-</div>
-
-<!-- ================= JAVASCRIPT ================= -->
 
 <script>
 
-/* ================= SHOW SECTIONS ================= */
+function calculateCGPA(){
 
-function showSection(sectionId){
+    let current =
+    parseFloat(document.getElementById("currentCGPA").value);
 
-document.getElementById("cgpaSection").style.display = "none";
-document.getElementById("backlogSection").style.display = "none";
-document.getElementById("examSection").style.display = "none";
+    let target =
+    parseFloat(document.getElementById("targetCGPA").value);
 
-document.getElementById(sectionId).style.display = "block";
+    let improvement = target - current;
 
+    document.getElementById("result").innerHTML = `
+
+        <p>📊 Current CGPA: <b>${current}</b></p>
+
+        <p>🎯 Target CGPA: <b>${target}</b></p>
+
+        <p>📈 Improvement Needed: <b>${improvement.toFixed(2)}</b></p>
+
+    `;
 }
 
-/* ================= ICONS ================= */
+function analyzeBacklog(){
 
-const icons = [
-"📘","📗","📙","📕",
-"💻","🧪","📐","🧮",
-"📓","📔"
-];
+    let subject =
+    document.getElementById("failedSubject").value;
 
-/* ================= CREATE SUBJECTS ================= */
+    let drop =
+    parseFloat(document.getElementById("cgpaDrop").value);
 
-function createSubjects(){
+    document.getElementById("result").innerHTML += `
 
-let n =
-document.getElementById("subjects").value;
+        <hr>
 
-let div =
-document.getElementById("subjectInputs");
+        <p>❌ Failed Subject: <b>${subject}</b></p>
 
-div.innerHTML = "";
+        <p>📉 Expected CGPA Drop: <b>${drop}</b></p>
 
-for(let i=0;i<n;i+=3){
-
-div.innerHTML += `
-
-<div class="subject-row">
-
-${createCard(i)}
-
-${i+1 < n ? createCard(i+1) : ""}
-
-${i+2 < n ? createCard(i+2) : ""}
-
-</div>
-
-`;
-
+    `;
 }
-
-}
-
-/* ================= SUBJECT CARD ================= */
-
-function createCard(i){
-
-return `
-
-<div class="subject-card">
-
-<h3>
-${icons[i % icons.length]}
-Subject ${i+1}
-</h3>
-
-<input id="sub${i}"
-placeholder="Subject Name">
-
-<input id="out${i}"
-type="number"
-placeholder="Out of Marks">
-
-</div>
-
-`;
-
-}
-
-/* ================= CGPA ================= */
-
-function calculateSubjects(){
-
-let n =
-document.getElementById("subjects").value;
-
-let current =
-parseFloat(
-document.getElementById("currentCGPA").value
-);
-
-let target =
-parseFloat(
-document.getElementById("targetCGPA").value
-);
-
-let currentPercent = current * 9.5;
-let targetPercent = target * 9.5;
-
-let improvement =
-targetPercent - currentPercent;
-
-let html = `
-
-<h3>🎯 CGPA Analysis</h3>
-
-`;
-
-for(let i=0;i<n;i++){
-
-let name =
-document.getElementById("sub"+i).value
-|| "Subject "+(i+1);
-
-let out =
-+document.getElementById("out"+i).value;
-
-let required =
-(targetPercent/100) * out;
-
-html += `
-
-<p style="
-padding:10px;
-border-radius:12px;
-background:rgba(255,255,255,0.05);
-animation:pulse 2s infinite;
-">
-
-${icons[i % icons.length]}
-<b>${name}</b>
-
-→
-
-🔥 Need
-<b>${required.toFixed(1)} / ${out}</b>
-
-</p>
-
-`;
-
-}
-
-html += `
-
-<hr>
-
-<p style="color:#00f0ff;">
-📈 Improvement Needed:
-${improvement.toFixed(2)}%
-</p>
-
-`;
-
-document.getElementById("overallResult").innerHTML =
-html;
-
-/* ================= CIRCLE ================= */
-
-let progress = target * 10;
-
-document.getElementById("cgpaCircle")
-.style.setProperty(
-'--progress',
-`${progress * 3.6}deg`
-);
-
-document.getElementById("cgpaPercent")
-.innerHTML =
-target + " CGPA";
-
-}
-
-/* ================= BACKLOG ================= */
-
-function calculateBacklogImpact(){
-
-let subject =
-document.getElementById("failedSubject").value;
-
-let current =
-parseFloat(
-document.getElementById("currentCgpaBacklog").value
-);
-
-let drop =
-parseFloat(
-document.getElementById("dropValue").value
-);
-
-let newCGPA = current - drop;
-
-let recovery = "";
-
-if(newCGPA >= 8){
-
-recovery =
-"🔥 Recovery Possible With Consistent Study";
-
-}
-else if(newCGPA >= 6){
-
-recovery =
-"📘 Focus More On Assignments & Internals";
-
-}
-else{
-
-recovery =
-"⚠️ Immediate Improvement Needed";
-
-}
-
-document.getElementById("overallResult").innerHTML += `
-
-<hr>
-
-<h3>📉 Backlog Analysis</h3>
-
-<p>
-❌ Failed Subject:
-<b>${subject}</b>
-</p>
-
-<p>
-📊 Predicted CGPA:
-<b>${newCGPA.toFixed(2)}</b>
-</p>
-
-<p style="color:#00ff95;">
-${recovery}
-</p>
-
-`;
-
-}
-
-/* ================= EXAM TIMETABLE ================= */
-
-function addExam(){
-
-let subject =
-document.getElementById("examSubject").value;
-
-let date =
-document.getElementById("examDate").value;
-
-let time =
-document.getElementById("examTime").value;
-
-document.getElementById("examCards").innerHTML += `
-
-<div class="exam-card">
-
-<h3 style="color:#00f0ff;">
-📘 ${subject}
-</h3>
-
-<p>
-📅 ${date}
-</p>
-
-<p>
-⏰ ${time}
-</p>
-
-</div>
-
-`;
-
-document.getElementById("overallResult").innerHTML += `
-
-<hr>
-
-<h3>🗓️ Upcoming Exam</h3>
-
-<p>
-📘 ${subject}
-</p>
-
-<p>
-📅 ${date}
-</p>
-
-<p>
-⏰ ${time}
-</p>
-
-`;
-
-}
-
-/* ================= LIVE DATE TIME ================= */
-
-function updateClock(){
-
-let now = new Date();
-
-document.getElementById("liveDateTime")
-.innerHTML =
-now.toLocaleString();
-
-}
-
-setInterval(updateClock,1000);
 
 </script>
 
